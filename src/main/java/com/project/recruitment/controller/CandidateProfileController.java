@@ -7,6 +7,8 @@ import com.project.recruitment.entity.CandidateProfile;
 import com.project.recruitment.service.CandidateProfileService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,7 +25,21 @@ public class CandidateProfileController extends BaseController{
         List<CandidateProfile> candidateProfiles = candidateProfileService.getAll();
         CandidateProfileResponse candidateProfileResponse = new CandidateProfileResponse();
         candidateProfileResponse.setData(candidateProfiles);
-        return candidateProfileResponse;
+        return success(candidateProfileResponse);
+    }
+
+    @GetMapping("/{id}")
+    public CandidateProfileResponse getById(@PathVariable Integer id){
+        CandidateProfile candidateProfile = candidateProfileService.getById(id);
+        CandidateProfileResponse candidateProfileResponse = new CandidateProfileResponse();
+        if(candidateProfile != null){
+            List<CandidateProfile> candidateProfiles = new ArrayList<>();
+            candidateProfiles.add(candidateProfile);
+            candidateProfileResponse.setData(candidateProfiles);
+            return success(candidateProfileResponse);
+        } else {
+            return error(candidateProfileResponse, "Not found candidate with id "+id);
+        }
     }
 
     @GetMapping("/recruitment/{id}")
@@ -31,7 +47,7 @@ public class CandidateProfileController extends BaseController{
         List<CandidateProfile> candidateProfiles = candidateProfileService.getByRecruitment(id);
         CandidateProfileResponse candidateProfileResponse = new CandidateProfileResponse();
         candidateProfileResponse.setData(candidateProfiles);
-        return candidateProfileResponse;
+        return success(candidateProfileResponse);
     }
 
     @GetMapping("/department/{id}")
@@ -39,7 +55,7 @@ public class CandidateProfileController extends BaseController{
         List<CandidateProfile> candidateProfiles = candidateProfileService.getByDepartment(id);
         CandidateProfileResponse candidateProfileResponse = new CandidateProfileResponse();
         candidateProfileResponse.setData(candidateProfiles);
-        return candidateProfileResponse;
+        return success(candidateProfileResponse);
     }
 
     @PostMapping

@@ -38,6 +38,16 @@ public class CandidateProfileServiceImpl implements CandidateProfileService{
     }
 
     @Override
+    public CandidateProfile getById(Integer id) {
+        Optional<CandidateProfile> candidateProfileOptional = candidateProfileRepository.findById(id);
+        if(candidateProfileOptional.isPresent()){
+            return candidateProfileOptional.get();
+        } else {
+            return null;
+        }
+    }
+
+    @Override
     public List<CandidateProfile> getByRecruitment(Integer recruitmentId) {
         Optional<Recruitment> recruitmentOptional = recruitmentRepository.findById(recruitmentId);
         if(recruitmentOptional.isPresent()){

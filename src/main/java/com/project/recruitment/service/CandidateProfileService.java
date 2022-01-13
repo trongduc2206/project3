@@ -10,6 +10,7 @@ import java.util.List;
 @Service
 public interface CandidateProfileService {
     List<CandidateProfile> getAll();
+    CandidateProfile getById(Integer id);
     List<CandidateProfile> getByRecruitment(Integer recruitmentId);
     List<CandidateProfile> getByDepartment(Integer departmentId);
     ResultResponse create(CandidateProfileRequest candidateProfileRequest);
