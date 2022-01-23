@@ -1,6 +1,7 @@
 package com.project.recruitment.service.impl;
 
 import com.project.recruitment.controller.response.LoginResponse;
+import com.project.recruitment.controller.response.ResultResponse;
 import com.project.recruitment.controller.response.UpdateAccountResponse;
 import com.project.recruitment.entity.Account;
 import com.project.recruitment.repository.AccountRepository;
@@ -34,9 +35,20 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void insert(Account account){
+    public ResultResponse insert(Account account){
+        ResultResponse resultResponse = new ResultResponse();
+        String username = account.getUsername();
+        Optional<Account> accountOptional = accountRepository.findByUsername(username);
+        if(accountOptional.isPresent()){
+            resultResponse.setResult(false);
+            resultResponse.setMessage("Username "+username+ " existed");
+            return resultResponse;
+        }
        account.setId(null);
        accountRepository.save(account);
+       resultResponse.setResult(true);
+       resultResponse.setMessage("Success inserted account with username "+username+" and password " + account.getPassword());
+       return resultResponse;
     }
 
     @Override

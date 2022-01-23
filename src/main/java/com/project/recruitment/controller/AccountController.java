@@ -2,6 +2,7 @@ package com.project.recruitment.controller;
 import com.project.recruitment.controller.request.LoginRequest;
 import com.project.recruitment.controller.response.GeneralResponse;
 import com.project.recruitment.controller.response.LoginResponse;
+import com.project.recruitment.controller.response.ResultResponse;
 import com.project.recruitment.controller.response.UpdateAccountResponse;
 import com.project.recruitment.entity.Account;
 import com.project.recruitment.service.AccountService;
@@ -24,8 +25,8 @@ public class AccountController extends BaseController {
 
     @PostMapping
     public GeneralResponse create(@RequestBody Account account){
-        accountService.insert(account);
-        return success();
+        ResultResponse resultResponse = accountService.insert(account);
+        return success(resultResponse);
     }
 
     @PutMapping
