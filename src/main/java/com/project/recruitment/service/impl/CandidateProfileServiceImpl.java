@@ -153,4 +153,16 @@ public class CandidateProfileServiceImpl implements CandidateProfileService{
         }
         return resultResponse;
     }
+
+    @Override
+    public List<CandidateProfile> getElectedProfileByDepartment(Integer departmentId) {
+        Optional<Department> department = departmentRepository.findById(departmentId);
+        if(department.isPresent()) {
+            Double pointToElected = department.get().getPoint();
+            List<CandidateProfile> candidateProfiles = candidateProfileRepository.findByPointGreaterThan(pointToElected);
+            return candidateProfiles;
+        } else {
+            return null;
+        }
+    }
 }

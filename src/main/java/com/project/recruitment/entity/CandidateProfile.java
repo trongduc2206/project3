@@ -55,4 +55,7 @@ public class CandidateProfile {
     @Column(name = "updated_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedTime;
+
+    @Column(name = "point")
+    private Double point;
 }

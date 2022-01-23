@@ -58,6 +58,18 @@ public class CandidateProfileController extends BaseController{
         return success(candidateProfileResponse);
     }
 
+    @GetMapping("/elected/{id}")
+    public CandidateProfileResponse getElectedDepartment(@PathVariable int id){
+        List<CandidateProfile> candidateProfiles = candidateProfileService.getElectedProfileByDepartment(id);
+        CandidateProfileResponse candidateProfileResponse = new CandidateProfileResponse();
+        if(candidateProfiles != null) {
+            candidateProfileResponse.setData(candidateProfiles);
+            return success(candidateProfileResponse);
+        } else {
+            return error(candidateProfileResponse, "Not found department with id "+id);
+        }
+    }
+
     @PostMapping
     public ResultResponse create(@RequestBody CandidateProfileRequest candidateProfileRequest){
         return success(candidateProfileService.create(candidateProfileRequest));

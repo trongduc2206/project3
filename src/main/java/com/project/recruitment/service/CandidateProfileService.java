@@ -16,4 +16,5 @@ public interface CandidateProfileService {
     ResultResponse create(CandidateProfileRequest candidateProfileRequest);
     ResultResponse update(CandidateProfile candidateProfile);
     ResultResponse delete(Integer id);
+    List<CandidateProfile> getElectedProfileByDepartment(Integer departmentId);
 }

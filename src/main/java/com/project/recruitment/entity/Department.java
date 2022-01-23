@@ -16,4 +16,7 @@ public class Department {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "point")
+    private Double point;
 }

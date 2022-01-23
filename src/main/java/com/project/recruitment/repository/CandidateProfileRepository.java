@@ -13,4 +13,6 @@ public interface CandidateProfileRepository extends JpaRepository<CandidateProfi
     List<CandidateProfile> findByRecruitment(Recruitment recruitment);
 
     List<CandidateProfile> findByDepartment(Department department);
+
+    List<CandidateProfile> findByPointGreaterThan(Double point);
 }
